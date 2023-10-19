@@ -2,9 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Sample shapes for demonstration purposes:
         List<ThreeDShape> shapes = Arrays.asList(
-            // TODO: You can add some actual ThreeDShape objects here for testing.
         );
 
         Comparator<ThreeDShape> comparator = null;
@@ -14,7 +12,7 @@ public class Main {
                 String type = args[i + 1];
                 switch (type) {
                     case "h":
-                        Collections.sort(shapes); // Use the default compareTo method for height
+                        Collections.sort(shapes);
                         break;
                     case "v":
                         comparator = new VolumeComparator();
@@ -30,7 +28,6 @@ public class Main {
                 }
             }
         }
-        // Print sorted shapes for demonstration
         for (ThreeDShape shape : shapes) {
             System.out.println(shape);
         }
