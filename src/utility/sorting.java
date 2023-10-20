@@ -2,9 +2,9 @@ package utility;
 
 public class sorting {
 
-    public static void bubbleSort(double[] arr) {
+    public static void bubbleSort(int[] arr) {
         int n = arr.length;
-        double temp = 0;
+        int temp = 0;
         int i = 0;
         int j = 0;
         for (i = 0; i < n; i++) {
@@ -31,7 +31,7 @@ public class sorting {
         }
     }
 
-    public static void quickSort(double[] arr, int low, int high) {
+    public static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
 
@@ -41,8 +41,8 @@ public class sorting {
         }
     }
 
-    public static int partition(double[] arr, int low, int high) {
-        double pivot = arr[high];
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
         int i = low - 1; // index of smaller element
 
         for (int j = low; j < high; j++) {
@@ -51,7 +51,7 @@ public class sorting {
                 i++;
 
                 // swap arr[i] and arr[j]
-                double temp = arr[i];
+                int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
 
@@ -59,7 +59,7 @@ public class sorting {
         }
 
         // swap arr[i+1] and arr[high] (or pivot)
-        double temp = arr[i + 1];
+        int temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
@@ -69,7 +69,7 @@ public class sorting {
 
 
 
-    public static void selectionSort(int[] arr) {
+    public static void selectionSort(double[] arr) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
             int minIdx = i;
@@ -78,82 +78,57 @@ public class sorting {
                     minIdx = j;
                 }
             }
-            int temp = arr[minIdx];
+            double temp = arr[minIdx];
             arr[minIdx] = arr[i];
             arr[i] = temp;
         }
     }
     
+    
+    public static void mergeSort(double[] array) {
+        if (array == null || array.length <= 1) {
+            return;
+        }
 
-    public class MergeSort {
+        double[] temp = new double[array.length];
+        mergeSort(array, temp, 0, array.length - 1);
+    }
 
-        // Public method to start the sort
-        public static int[] sort(int[] array) {
-            if (array == null || array.length <= 1) {
-                return array;
-            }
-            int[] sortedArray = array.clone(); // Clone the array to avoid modifying the original
-            mergeSort(sortedArray, 0, sortedArray.length - 1);
-            return sortedArray;
-        }
-    
-        private static void mergeSort(int[] arr, int l, int r) {
-            if (l < r) {
-                int m = l + (r - l) / 2;
-                mergeSort(arr, l, m);
-                mergeSort(arr, m + 1, r);
-                merge(arr, l, m, r);
-            }
-        }
-    
-        private static void merge(int[] arr, int l, int m, int r) {
-            int n1 = m - l + 1;
-            int n2 = r - m;
-    
-            int[] L = new int[n1];
-            int[] R = new int[n2];
-    
-            System.arraycopy(arr, l, L, 0, n1);
-            System.arraycopy(arr, m + 1, R, 0, n2);
-    
-            int i = 0, j = 0, k = l;
-            while (i < n1 && j < n2) {
-                if (L[i] <= R[j]) {
-                    arr[k++] = L[i++];
-                } else {
-                    arr[k++] = R[j++];
-                }
-            }
-    
-            while (i < n1) {
-                arr[k++] = L[i++];
-            }
-    
-            while (j < n2) {
-                arr[k++] = R[j++];
-            }
-        }
-    
-        public static void main(String[] args) {
-            int[] array = {38, 27, 43, 3, 9, 82, 10};
-            System.out.println("Given Array:");
-            printArray(array);
-            
-            int[] sortedArray = sort(array);
-            
-            System.out.println("\nSorted Array:");
-            printArray(sortedArray);
-        }
-    
-        private static void printArray(int[] arr) {
-            for (int value : arr) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
+    private static void mergeSort(double[] array, double[] temp, int left, int right) {
+        if (left < right) {
+            int middle = (left + right) / 2;
+            mergeSort(array, temp, left, middle);
+            mergeSort(array, temp, middle + 1, right);
+            merge(array, temp, left, middle, right);
         }
     }
-    
 
+    private static void merge(double[] array, double[] temp, int left, int middle, int right) {
+        System.arraycopy(array, left, temp, left, right - left + 1);
+
+        int i = left;
+        int j = middle + 1;
+        int k = left;
+
+        while (i <= middle && j <= right) {
+            if (temp[i] <= temp[j]) {
+                array[k] = temp[i];
+                i++;
+            } else {
+                array[k] = temp[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i <= middle) {
+            array[k] = temp[i];
+            i++;
+            k++;
+        }
+    }
+
+    
 }
 
 
