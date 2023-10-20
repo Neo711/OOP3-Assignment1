@@ -1,6 +1,6 @@
 package utility;
 
-public class sorting {
+public class Sorting {
 
     public static void bubbleSort(double[] arr) {
         int n = arr.length;
