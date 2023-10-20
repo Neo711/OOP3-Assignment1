@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-class sortingTest {
+public class sortingTest {
 
 	@Test
 	void test() {
-		fail("Test failed");
+		fail("Not implemented yet");
 	}
 
 }
