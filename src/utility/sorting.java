@@ -55,4 +55,95 @@ public class sorting {
         // return the index of the pivot
         return i + 1;
     }
+
+
+
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            int temp = arr[minIdx];
+            arr[minIdx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+    
+
+    public class MergeSort {
+
+        // Public method to start the sort
+        public static int[] sort(int[] array) {
+            if (array == null || array.length <= 1) {
+                return array;
+            }
+            int[] sortedArray = array.clone(); // Clone the array to avoid modifying the original
+            mergeSort(sortedArray, 0, sortedArray.length - 1);
+            return sortedArray;
+        }
+    
+        private static void mergeSort(int[] arr, int l, int r) {
+            if (l < r) {
+                int m = l + (r - l) / 2;
+                mergeSort(arr, l, m);
+                mergeSort(arr, m + 1, r);
+                merge(arr, l, m, r);
+            }
+        }
+    
+        private static void merge(int[] arr, int l, int m, int r) {
+            int n1 = m - l + 1;
+            int n2 = r - m;
+    
+            int[] L = new int[n1];
+            int[] R = new int[n2];
+    
+            System.arraycopy(arr, l, L, 0, n1);
+            System.arraycopy(arr, m + 1, R, 0, n2);
+    
+            int i = 0, j = 0, k = l;
+            while (i < n1 && j < n2) {
+                if (L[i] <= R[j]) {
+                    arr[k++] = L[i++];
+                } else {
+                    arr[k++] = R[j++];
+                }
+            }
+    
+            while (i < n1) {
+                arr[k++] = L[i++];
+            }
+    
+            while (j < n2) {
+                arr[k++] = R[j++];
+            }
+        }
+    
+        public static void main(String[] args) {
+            int[] array = {38, 27, 43, 3, 9, 82, 10};
+            System.out.println("Given Array:");
+            printArray(array);
+            
+            int[] sortedArray = sort(array);
+            
+            System.out.println("\nSorted Array:");
+            printArray(sortedArray);
+        }
+    
+        private static void printArray(int[] arr) {
+            for (int value : arr) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+
 }
+
+
+
