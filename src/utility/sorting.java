@@ -19,18 +19,18 @@ public class sorting {
             }
         }
     }
-    public static void insertionSort(int[] array) {
-        for (int i = 1; i < array.length; i++) {
-            int current = array[i];
+    public static void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int current = arr[i];
             int j = i - 1;
-            while(j >= 0 && array[j] > current) {
-                array[j+1] = array[j];
+            while(j >= 0 && arr[j] > current) {
+                arr[j+1] = arr[j];
                 j = j -1;
             }
-            array[j+1] = current;
+            arr[j+1] = current;
         }
     }
-    
+
     public static void quickSort(double[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
