@@ -20,7 +20,7 @@ public class SortingTest {
 	public void testQuickSort() {
 		double[] arr = { 3.0, 1.0, 4.0, 2.0, 5.0 };
 		double[] expected = { 1.0, 2.0, 3.0, 4.0, 5.0 };
-		Sorting.quickSort(arr, 0, arr.length - 1);
+		Sorting.quickSort(arr);
 		assertArrayEquals(expected, arr, 0.0);
 	}
 
