@@ -39,5 +39,5 @@ public class SortingTest {
 		int[] sortedArray = Sorting.MergeSort.sort(arr);
 		assertArrayEquals(expected, sortedArray);
 	}
-
+	
 }
