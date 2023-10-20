@@ -19,6 +19,10 @@ public class Sorting {
             }
         }
     }
+    
+    public static void quickSort(double[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
 
     public static void quickSort(double[] arr, int low, int high) {
         if (low < high) {
