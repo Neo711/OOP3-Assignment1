@@ -2,9 +2,9 @@ package utility;
 
 public class sorting {
 
-    public static void bubbleSort(int[] arr) {
+    public static void bubbleSort(double[] arr) {
         int n = arr.length;
-        int temp = 0;
+        double temp = 0;
         int i = 0;
         int j = 0;
         for (i = 0; i < n; i++) {
@@ -20,7 +20,7 @@ public class sorting {
         }
     }
 
-    public static void quickSort(int[] arr, int low, int high) {
+    public static void quickSort(double[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
 
@@ -30,8 +30,8 @@ public class sorting {
         }
     }
 
-    public static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
+    public static int partition(double[] arr, int low, int high) {
+        double pivot = arr[high];
         int i = low - 1; // index of smaller element
 
         for (int j = low; j < high; j++) {
@@ -40,7 +40,7 @@ public class sorting {
                 i++;
 
                 // swap arr[i] and arr[j]
-                int temp = arr[i];
+                double temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
 
@@ -48,7 +48,7 @@ public class sorting {
         }
 
         // swap arr[i+1] and arr[high] (or pivot)
-        int temp = arr[i + 1];
+        double temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
