@@ -20,4 +20,16 @@ public class Cylinder extends Prism {
         double baseArea = Math.PI * Math.pow(this.radius, 2);
         return baseArea;
     }
+
+    @Override
+    public int compareTo(Shape arg0) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
+    }
+
+    @Override
+    public int compare(Shape arg0, Shape arg1) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'compare'");
+    }
 }

@@ -9,7 +9,6 @@ public class Sorting {
         int j = 0;
         for (i = 0; i < n; i++) {
             for (j = 1; j < (n - i); j++) {
-
                 if (arr[j - 1] > arr[j]) {
                     // swap elements
                     temp = arr[j - 1];

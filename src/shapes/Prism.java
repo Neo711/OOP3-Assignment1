@@ -1,15 +1,46 @@
 package shapes;
 
-public abstract class Prism {
+/*
+ * Making this class abstract means that it cannot be instantiated. This is
+ * allows us to make our code reusable, maintainable, and scalable!
+ * 
+ * This class will be the parent class for all of our prisms. It will contain
+ * the height and sideLength attributes, which are common to all prisms.
+ * 
+ * This class extends the Shape class, which means that it inherits the height
+ * attribute and the addShape() method.
+ * 
+ * This class implements the Comparable and Comparator interfaces. This means
+ * that any class that extends this class will have to implement the
+ * compareTo() and compare() methods.
+ * 
+ * We will use the compareTo() method to compare two prisms by their height.
+ * We will use the compare() method to compare two prisms by their base area and volume.
+ */
+public abstract class Prism extends Shape {
     double height;
     double sideLength;
 
+    /*
+     * This constructor will be called by the constructors of the classes that
+     * extend this class. It will set the height and sideLength attributes to the
+     * values passed in as arguments.The constructor also calls the constructor of
+     * the Shape class, which adds the shape to the shapesArray array.
+     */
     public Prism(double height, double sideLength) {
-        this.height = height;
+        super(height);
         this.sideLength = sideLength;
     }
 
+    /*
+     * The calcVolume() method will be implemented by the classes that extend this
+     * class. It will calculate the volume of the prism.
+     */
     public abstract double calcVolume();
 
+    /*
+     * The calcBaseArea() method will be implemented by the classes that extend this
+     * class. It will calculate the base area of the prism.
+     */
     public abstract double calcBaseArea();
 }
