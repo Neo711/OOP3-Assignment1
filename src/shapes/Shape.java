@@ -21,16 +21,16 @@ import java.util.Comparator;
  */
 public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
     public static Shape[] shapesArray = {};
-    public double value1;
     public static String compareType;
+    public double height;
 
     /*
      * This constructor will be called by the constructors of the classes that
      * extend this class. It will set the height attribute to the value passed
      * in as an argument, and it will add the shape to the shapesArray array.
      */
-    public Shape(double value1) {
-        this.value1 = value1;
+    public Shape(double height) {
+        this.height = height;
         this.addShape();
     }
 
@@ -73,9 +73,9 @@ public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
 
     @Override
     public int compareTo(Shape s1) {
-        if (this.value1 > s1.value1) {
+        if (this.height > s1.height) {
             return 1;
-        } else if (this.value1 < s1.value1) {
+        } else if (this.height < s1.height) {
             return -1;
         } else {
             return 0;

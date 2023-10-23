@@ -1,7 +1,6 @@
 package shapes;
 
 public class Cylinder extends Shape {
-    public double height;
     public double radius;
 
     public Cylinder(double height, double radius) {

@@ -1,7 +1,6 @@
 package shapes;
 
 public class Cone extends Shape {
-    public double height;
     public double radius;
 
     public Cone(double height, double radius) {

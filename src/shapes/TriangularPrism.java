@@ -1,8 +1,6 @@
 package shapes;
 
 public class TriangularPrism extends Prism {
-    public double height;
-    public double side;
 
     public TriangularPrism(double height, double side) {
         super(height, side);

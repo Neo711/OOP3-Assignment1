@@ -1,8 +1,6 @@
 package shapes;
 
 public class SquarePrism extends Prism {
-    public double height;
-    public double side;
 
     public SquarePrism(double height, double side) {
         super(height, side);

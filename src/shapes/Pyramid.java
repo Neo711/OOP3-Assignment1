@@ -1,7 +1,6 @@
 package shapes;
 
 public class Pyramid extends Shape {
-    public double height;
     public double side;
 
     public Pyramid(double height, double side) {
