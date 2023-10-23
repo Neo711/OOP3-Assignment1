@@ -15,7 +15,7 @@ public class SquarePrism extends Prism {
 
     @Override
     public double calcBaseArea() {
-        double baseArea = Math.pow(this.side, 2);
+        double baseArea = this.side * this.side;
         return baseArea;
     }
 }

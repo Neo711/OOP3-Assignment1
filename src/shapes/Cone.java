@@ -11,7 +11,7 @@ public class Cone extends Shape {
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = (1 / 3) * baseArea * this.height;
+        double volume = baseArea * this.height / 3;
         return volume;
     }
 

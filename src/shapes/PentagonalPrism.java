@@ -15,7 +15,7 @@ public class PentagonalPrism extends Prism {
 
     @Override
     public double calcBaseArea() {
-        double baseArea = (1 / 4) * Math.sqrt(5 * (5 + 2 * Math.sqrt(5))) * Math.pow(this.side, 2);
+        double baseArea = Math.sqrt(5 * (5 + 2 * Math.sqrt(5))) * Math.pow(this.side, 2) / 4;
         return baseArea;
     }
 }

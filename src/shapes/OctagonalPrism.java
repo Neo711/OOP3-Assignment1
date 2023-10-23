@@ -15,7 +15,7 @@ public class OctagonalPrism extends Prism {
 
     @Override
     public double calcBaseArea() {
-        double baseArea = 2 * (1 + Math.sqrt(2)) * Math.pow(this.side, 2);
+        double baseArea = (1 + Math.sqrt(2)) * Math.pow(this.side, 2) * 2;
         return baseArea;
     }
 }
