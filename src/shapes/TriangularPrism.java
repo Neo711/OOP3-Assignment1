@@ -1,12 +1,11 @@
 package shapes;
 
-public class Cylinder extends Shape {
+public class TriangularPrism extends Prism {
     public double height;
-    public double radius;
+    public double side;
 
-    public Cylinder(double height, double radius) {
-        super(height);
-        this.radius = radius;
+    public TriangularPrism(double height, double side) {
+        super(height, side);
     }
 
     @Override
@@ -18,7 +17,7 @@ public class Cylinder extends Shape {
 
     @Override
     public double calcBaseArea() {
-        double baseArea = Math.PI * Math.pow(this.radius, 2);
+        double baseArea = (Math.sqrt(3) / 4) * Math.pow(this.side, 2);
         return baseArea;
     }
 }

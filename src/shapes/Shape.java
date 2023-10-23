@@ -21,15 +21,16 @@ import java.util.Comparator;
  */
 public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
     public static Shape[] shapesArray = {};
-    public double height;
+    public double value1;
+    public static String compareType;
 
     /*
      * This constructor will be called by the constructors of the classes that
      * extend this class. It will set the height attribute to the value passed
      * in as an argument, and it will add the shape to the shapesArray array.
      */
-    public Shape(double height) {
-        this.height = height;
+    public Shape(double value1) {
+        this.value1 = value1;
         this.addShape();
     }
 
@@ -51,6 +52,14 @@ public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
     }
 
     /*
+     * The setCompareType() method will set the compareType attribute to the
+     * value passed in as an argument.
+     */
+    public static void setCompareType(String compareType) {
+        Shape.compareType = compareType;
+    }
+
+    /*
      * The calcVolume() method will be implemented by the classes that extend
      * this class. It will calculate the volume of the shape.
      */
@@ -61,4 +70,38 @@ public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
      * this class. It will calculate the base area of the shape.
      */
     public abstract double calcBaseArea();
+
+    @Override
+    public int compareTo(Shape s1) {
+        if (this.value1 > s1.value1) {
+            return 1;
+        } else if (this.value1 < s1.value1) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int compare(Shape s1, Shape s2) {
+        if (compareType == "volume") {
+            if (s1.calcVolume() > s2.calcVolume()) {
+                return 1;
+            } else if (s1.calcVolume() < s2.calcVolume()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        } else if (compareType == "base area") {
+            if (s1.calcBaseArea() > s2.calcBaseArea()) {
+                return 1;
+            } else if (s1.calcBaseArea() < s2.calcBaseArea()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
 }

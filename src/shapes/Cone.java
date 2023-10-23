@@ -1,10 +1,10 @@
 package shapes;
 
-public class Cylinder extends Shape {
+public class Cone extends Shape {
     public double height;
     public double radius;
 
-    public Cylinder(double height, double radius) {
+    public Cone(double height, double radius) {
         super(height);
         this.radius = radius;
     }
@@ -12,7 +12,7 @@ public class Cylinder extends Shape {
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = baseArea * this.height;
+        double volume = (1 / 3) * baseArea * this.height;
         return volume;
     }
 

@@ -1,24 +1,24 @@
 package shapes;
 
-public class Cylinder extends Shape {
+public class Pyramid extends Shape {
     public double height;
-    public double radius;
+    public double side;
 
-    public Cylinder(double height, double radius) {
+    public Pyramid(double height, double side) {
         super(height);
-        this.radius = radius;
+        this.side = side;
     }
 
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = baseArea * this.height;
+        double volume = (1 / 3) * baseArea * this.height;
         return volume;
     }
 
     @Override
     public double calcBaseArea() {
-        double baseArea = Math.PI * Math.pow(this.radius, 2);
+        double baseArea = Math.pow(this.side, 2);
         return baseArea;
     }
 }

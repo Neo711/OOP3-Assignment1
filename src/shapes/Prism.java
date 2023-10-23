@@ -18,8 +18,8 @@ package shapes;
  * We will use the compare() method to compare two prisms by their base area and volume.
  */
 public abstract class Prism extends Shape {
-    double height;
-    double sideLength;
+    double value1;
+    double value2;
 
     /*
      * This constructor will be called by the constructors of the classes that
@@ -27,20 +27,8 @@ public abstract class Prism extends Shape {
      * values passed in as arguments.The constructor also calls the constructor of
      * the Shape class, which adds the shape to the shapesArray array.
      */
-    public Prism(double height, double sideLength) {
-        super(height);
-        this.sideLength = sideLength;
+    public Prism(double value1, double value2) {
+        super(value1);
+        this.value2 = value2;
     }
-
-    /*
-     * The calcVolume() method will be implemented by the classes that extend this
-     * class. It will calculate the volume of the prism.
-     */
-    public abstract double calcVolume();
-
-    /*
-     * The calcBaseArea() method will be implemented by the classes that extend this
-     * class. It will calculate the base area of the prism.
-     */
-    public abstract double calcBaseArea();
 }
