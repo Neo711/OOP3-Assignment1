@@ -1,49 +1,51 @@
-package main;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.io.IOException;
 
-public class Driver {
+public class ShapeFileReader {
 
-    public static void main(String[] args) {
-        String filePath = null;
+    public static void main(String[] args) throws Exception {
+        List<Shape> shapes = readShapesFromFile("path_to_shapes.txt");
+        for (Shape shape : shapes) {
+            System.out.println(shape);
+        }
+    }
 
-        // Parse command line arguments
-        for (int i = 0; i < args.length - 1; i++) {
-            if ("-f".equals(args[i])) {
-                filePath = args[i + 1];
-                break;
+    public static List<Shape> readShapesFromFile(String filePath) throws Exception {
+        // List<Shape> shapes = new ArrayList<>();//get rid
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            int numShapes = Integer.parseInt(br.readLine().trim());
+            for (int i = 0; i < numShapes; i++) {
+                String shapeType = br.readLine().trim();
+                Class<?> shapeClass = Class.forName(shapeType);
+
+                Constructor<?> constructor = shapeClass.getDeclaredConstructor();
+                constructor.setAccessible(true);
+                Object shape = constructor.newInstance();
+
+                Method method = shapeClass.getMethod(shapeType);
+                
+                // //if (shapeClass.equals(Circle.class)) {
+                //     double radius = Double.parseDouble(br.readLine().trim());
+                //     Constructor<?> constructor = shapeClass.getConstructor(double.class);
+                //     Shape circle = (Shape) constructor.newInstance(radius);
+                //     shapes.add(circle);
+                // } else if (shapeClass.equals(Rectangle.class)) {
+                //     String[] dimensions = br.readLine().split(" ");
+                //     double width = Double.parseDouble(dimensions[0]);
+                //     double height = Double.parseDouble(dimensions[1]);
+                //     Constructor<?> constructor = shapeClass.getConstructor(double.class, double.class);
+                //     Shape rectangle = (Shape) constructor.newInstance(width, height);
+                //     shapes.add(rectangle);
+                // } else {
+                //     throw new IllegalArgumentException("Unknown shape: " + shapeType);
+                // }
             }
         }
-
-        if (filePath == null) {
-            System.out.println("Please specify a file using the -f option.");
-            return;
-        }
-
-        // Assuming a maximum of 100 shapes for simplicity
-        String[] shapes = new String[100];
-        int shapeCount = 0;
-
-        // Use FileInput class to read from file
-        try (FileInput fileInput = new FileInput(filePath)) {
-            String shape;
-            while ((shape = fileInput.readLine()) != null && shapeCount < 100) {
-                shapes[shapeCount++] = shape;
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while reading the file: " + e.getMessage());
-        }
-
-        // Use FileOutput class to write to an output file
-        try (FileOutput fileOutput = new FileOutput("output.txt")) {
-            for (int i = 0; i < shapeCount; i++) {
-                fileOutput.writeLine(shapes[i]);
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file: " + e.getMessage());
-        }
-
-        System.out.println("Shapes processed and written to output.txt!");
+        return shapes;
     }
 }
 
