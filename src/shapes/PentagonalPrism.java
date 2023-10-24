@@ -6,6 +6,10 @@ public class PentagonalPrism extends Prism {
         super(height, side);
     }
 
+    public PentagonalPrism() {
+        super();
+    }
+
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();

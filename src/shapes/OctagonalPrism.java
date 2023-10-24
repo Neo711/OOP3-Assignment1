@@ -6,6 +6,10 @@ public class OctagonalPrism extends Prism {
         super(height, side);
     }
 
+    public OctagonalPrism() {
+        super();
+    }
+
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();

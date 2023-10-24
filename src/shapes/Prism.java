@@ -30,4 +30,27 @@ public abstract class Prism extends Shape {
         super(height);
         this.side = side;
     }
+
+    /*
+     * This constructor will be called by the constructors of the classes that
+     * extend this class. The constructor also calls the constructor of
+     * the Shape class, which adds the shape to the shapesArray array.
+     */
+    public Prism() {
+        super();
+    }
+
+    /*
+     * The getSide() method will return the side attribute.
+     */
+    public double getSide() {
+        return side;
+    }
+
+    /*
+     * The setSide() method will set the side attribute.
+     */
+    public void setSide(double side) {
+        this.side = side;
+    }
 }

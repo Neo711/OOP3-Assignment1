@@ -6,6 +6,10 @@ public class TriangularPrism extends Prism {
         super(height, side);
     }
 
+    public TriangularPrism() {
+        super();
+    }
+
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
