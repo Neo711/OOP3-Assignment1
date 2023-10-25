@@ -1,3 +1,5 @@
+package main;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
@@ -6,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shapes.Shape;
-
 
 public class Driver {
 
@@ -50,23 +51,19 @@ public class Driver {
     }
 }
 
-
-
-
-
-
-                // //if (shapeClass.equals(Circle.class)) {
-                //     double radius = Double.parseDouble(br.readLine().trim());
-                //     Constructor<?> constructor = shapeClass.getConstructor(double.class);
-                //     Shape circle = (Shape) constructor.newInstance(radius);
-                //     shapes.add(circle);
-                // } else if (shapeClass.equals(Rectangle.class)) {
-                //     String[] dimensions = br.readLine().split(" ");
-                //     double width = Double.parseDouble(dimensions[0]);
-                //     double height = Double.parseDouble(dimensions[1]);
-                //     Constructor<?> constructor = shapeClass.getConstructor(double.class, double.class);
-                //     Shape rectangle = (Shape) constructor.newInstance(width, height);
-                //     shapes.add(rectangle);
-                // } else {
-                //     throw new IllegalArgumentException("Unknown shape: " + shapeType);
-                // }
+// //if (shapeClass.equals(Circle.class)) {
+// double radius = Double.parseDouble(br.readLine().trim());
+// Constructor<?> constructor = shapeClass.getConstructor(double.class);
+// Shape circle = (Shape) constructor.newInstance(radius);
+// shapes.add(circle);
+// } else if (shapeClass.equals(Rectangle.class)) {
+// String[] dimensions = br.readLine().split(" ");
+// double width = Double.parseDouble(dimensions[0]);
+// double height = Double.parseDouble(dimensions[1]);
+// Constructor<?> constructor = shapeClass.getConstructor(double.class,
+// double.class);
+// Shape rectangle = (Shape) constructor.newInstance(width, height);
+// shapes.add(rectangle);
+// } else {
+// throw new IllegalArgumentException("Unknown shape: " + shapeType);
+// }
