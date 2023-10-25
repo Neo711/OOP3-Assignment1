@@ -6,6 +6,10 @@ public class SquarePrism extends Prism {
         super(height, side);
     }
 
+    public SquarePrism() {
+        super();
+    }
+
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();

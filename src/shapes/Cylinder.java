@@ -8,6 +8,18 @@ public class Cylinder extends Shape {
         this.radius = radius;
     }
 
+    public Cylinder() {
+        super();
+    }
+
+    public double getRadius() {
+        return this.radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();

@@ -35,6 +35,29 @@ public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
     }
 
     /*
+     * This constructor will be called by the constructors of the classes that
+     * extend this class. It will add the shape to the shapesArray array.
+     * This constructor does not take any arguments.
+     */
+    public Shape() {
+        this.addShape();
+    }
+
+    /*
+     * The getHeight() method will return the height attribute.
+     */
+    public double getHeight() {
+        return height;
+    }
+
+    /*
+     * The setHeight() method will set the height attribute.
+     */
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    /*
      * The addShape() method will add the shape to the shapesArray array.
      * It will create a new array that is one element larger than the
      * shapesArray array, and it will copy all of the elements from the
@@ -71,6 +94,15 @@ public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
      */
     public abstract double calcBaseArea();
 
+    /*
+     * The compareTo() method will compare two shapes by their height.
+     * It will return 1 if the height of the shape that called the method is
+     * greater than the height of the shape that was passed in as an argument.
+     * It will return -1 if the height of the shape that called the method is
+     * less than the height of the shape that was passed in as an argument.
+     * It will return 0 if the height of the shape that called the method is
+     * equal to the height of the shape that was passed in as an argument.
+     */
     @Override
     public int compareTo(Shape s1) {
         if (this.height > s1.height) {
@@ -82,6 +114,16 @@ public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
         }
     }
 
+    /*
+     * The compare() method will compare two shapes by their base area or volume.
+     * It will return 1 if the base area or volume of the shape that called the
+     * method is greater than the base area or volume of the shape that was
+     * passed in as an argument. It will return -1 if the base area or volume
+     * of the shape that called the method is less than the base area or volume
+     * of the shape that was passed in as an argument. It will return 0 if the
+     * base area or volume of the shape that called the method is equal to the
+     * base area or volume of the shape that was passed in as an argument.
+     */
     @Override
     public int compare(Shape s1, Shape s2) {
         if (compareType == "volume") {
