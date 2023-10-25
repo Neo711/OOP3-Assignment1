@@ -1,33 +1,60 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import shapes.Shape;
 
-public class ShapeFileReader {
 
-    public static void main(String[] args) throws Exception {
-        List<Shape> shapes = readShapesFromFile("path_to_shapes.txt");
-        for (Shape shape : shapes) {
-            System.out.println(shape);
+public class Driver {
+
+    public static void main(String[] args) {
+        try {
+            List<Shape> shapes = readShapesFromFile("path_to_shapes.txt");
+            for (Shape shape : shapes) {
+                System.out.println(shape);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public static List<Shape> readShapesFromFile(String filePath) throws Exception {
-        // List<Shape> shapes = new ArrayList<>();//get rid
+        List<Shape> shapes = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             int numShapes = Integer.parseInt(br.readLine().trim());
             for (int i = 0; i < numShapes; i++) {
                 String shapeType = br.readLine().trim();
                 Class<?> shapeClass = Class.forName(shapeType);
 
+                double param1 = Double.parseDouble(br.readLine().trim());
+                double param2 = Double.parseDouble(br.readLine().trim());
+
                 Constructor<?> constructor = shapeClass.getDeclaredConstructor();
                 constructor.setAccessible(true);
                 Object shape = constructor.newInstance();
 
-                Method method = shapeClass.getMethod(shapeType);
-                
+                Method initializeMethod = shapeClass.getMethod("initialize", double.class, double.class);
+                initializeMethod.invoke(shape, param1, param2);
+
+                if (shape instanceof Shape) {
+                    shapes.add((Shape) shape);
+                } else {
+                    System.out.println("The class " + shapeType + " is not an instance of Shape. Skipping...");
+                }
+            }
+        }
+        return shapes;
+    }
+}
+
+
+
+
+
+
                 // //if (shapeClass.equals(Circle.class)) {
                 //     double radius = Double.parseDouble(br.readLine().trim());
                 //     Constructor<?> constructor = shapeClass.getConstructor(double.class);
@@ -43,9 +70,3 @@ public class ShapeFileReader {
                 // } else {
                 //     throw new IllegalArgumentException("Unknown shape: " + shapeType);
                 // }
-            }
-        }
-        return shapes;
-    }
-}
-
