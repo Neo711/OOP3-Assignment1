@@ -302,6 +302,34 @@ public class Sorting {
         }
     }
 
+    public static void insertionSort(Shape[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            Shape key = arr[i];
+            int j = i - 1;
+            boolean swap = false;
+            if (Shape.compareType == "height") {
+                if (arr[j].getHeight() > key.getHeight()) {
+                    swap = true;
+                }
+            } else if (Shape.compareType == "volume") {
+                if (arr[j].calcVolume() > key.calcVolume()) {
+                    swap = true;
+                }
+            } else if (Shape.compareType == "base area") {
+                if (arr[j].calcBaseArea() > key.calcBaseArea()) {
+                    swap = true;
+                }
+            }
+            if (swap == true) {
+                while (j >= 0 && arr[j].getHeight() > key.getHeight()) {
+                    arr[j + 1] = arr[j--];
+                }
+                arr[j + 1] = key;
+            }
+        }
+    }
+
     private static void countSort (double arr[], int exp)
     {
         int n = arr.length;
@@ -311,7 +339,7 @@ public class Sorting {
 
         //store the count of occurences in count[]
         for (int i = 0; i < n; i++)
-            count [(int)Math.floor(arr[i]/exp)%10]++;//math.floor rounds down the digit, may need to change!!!!!!!!!!!**********
+            count [(int)Math.floor(arr[i]/exp)%100]++;//math.floor rounds down the digit, may need to change!!!!!!!!!!!**********
         
         // Changes count[i] so that count[i] now contains the actual position of said digit in output[]
         for (int i = 1; i < 10; i++)
@@ -320,11 +348,58 @@ public class Sorting {
         // this builds the output array
         for (int i = n - 1; i >= 0; i--)
         {
-            output[count[(int)Math.floor(arr[i]/exp)%10] - 1] = arr[i];
-            count[(int)Math.floor(arr[i]/exp)%10]--;
+            output[count[(int)Math.floor(arr[i]/exp)%100] - 1] = arr[i];
+            count[(int)Math.floor(arr[i]/exp)%100]--;
         }
 
         // Copy the output array to arr[], so that arr[] now contains sorted numbers according to current digit
+        for (int i = 0; i < n; i++)
+            arr[i] = output[i];
+    }
+
+    private static void countSort (Shape arr[], int exp)
+    {
+        int n = arr.length;
+        Shape output[] = new Shape [n]; 
+        int count[] = new  int [10]; 
+        Arrays.fill(count, 0);
+
+        
+        for (int i = 0; i < n; i++)
+        {
+            if (Shape.compareType == "height")
+                count [(int)Math.floor(arr[i].getHeight()/exp)%10]++;
+            else if (Shape.compareType == "volume")
+                count [(int)Math.floor(arr[i].calcVolume()/exp)%10]++;
+            else if (Shape.compareType == "base area")
+                count [(int)Math.floor(arr[i].calcBaseArea()/exp)%10]++;
+        }
+        
+        
+        for (int i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+
+        
+        for (int i = n - 1; i >= 0; i--)
+        {
+            if (Shape.compareType == "height")
+            {
+                output[count[(int)Math.floor(arr[i].getHeight()/exp)%10] - 1] = arr[i];
+                count[(int)Math.floor(arr[i].getHeight()/exp)%10]--;
+            }
+            else if (Shape.compareType == "volume")
+            {
+                output[count[(int)Math.floor(arr[i].calcVolume()/exp)%10] - 1] = arr[i];
+                count[(int)Math.floor(arr[i].calcVolume()/exp)%10]--;
+            }
+            else if (Shape.compareType == "base area")
+            {
+                output[count[(int)Math.floor(arr[i].calcBaseArea()/exp)%10] - 1] = arr[i];
+                count[(int)Math.floor(arr[i].calcBaseArea()/exp)%10]--;
+            }
+        }
+
+        
         for (int i = 0; i < n; i++)
             arr[i] = output[i];
     }
@@ -335,6 +410,20 @@ public class Sorting {
         double max = Arrays.stream(arr).max().getAsDouble();
 
         // Do counting sort for every digit. Note that instead of passing digit number, exp is passed. (exp is 10^i where i is current digit number)
+        for (int exp = 1; (int)Math.floor(max/exp) > 0; exp *= 10)
+            countSort(arr, exp);
+    }
+    
+    public static void radixSort (Shape arr[])
+    {
+        double max = 0;
+        if (Shape.compareType == "height")
+            max = Arrays.stream(arr).mapToDouble(Shape::getHeight).max().getAsDouble();
+        else if (Shape.compareType == "volume")
+            max = Arrays.stream(arr).mapToDouble(Shape::calcVolume).max().getAsDouble();
+        else if (Shape.compareType == "base area")
+            max = Arrays.stream(arr).mapToDouble(Shape::calcBaseArea).max().getAsDouble();
+
         for (int exp = 1; (int)Math.floor(max/exp) > 0; exp *= 10)
             countSort(arr, exp);
     }
