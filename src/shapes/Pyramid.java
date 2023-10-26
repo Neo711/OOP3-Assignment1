@@ -32,4 +32,8 @@ public class Pyramid extends Shape {
         double baseArea = Math.pow(this.side, 2);
         return baseArea;
     }
+
+    public String toString() {
+        return "Shape: Pyramid, Height: " + getHeight() + ", Side: " + getSide();
+    }
 }

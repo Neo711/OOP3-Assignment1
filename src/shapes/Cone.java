@@ -32,4 +32,8 @@ public class Cone extends Shape {
         double baseArea = Math.PI * Math.pow(this.radius, 2);
         return baseArea;
     }
+
+    public String toString() {
+        return "Shape: Cone, Height: " + getHeight() + ", Radius: " + getRadius();
+    }
 }

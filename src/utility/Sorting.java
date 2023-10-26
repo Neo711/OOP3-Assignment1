@@ -14,7 +14,7 @@ public class Sorting {
         for (i = 0; i < n; i++) {
             for (j = 1; j < (n - i); j++) {
                 if (arr[j - 1] > arr[j]) {
-                    // swap elements
+                    /** swap elements */
                     temp = arr[j - 1];
                     arr[j - 1] = arr[j];
                     arr[j] = temp;
@@ -45,7 +45,7 @@ public class Sorting {
                     }
                 }
                 if (swap == true) {
-                    // swap elements
+                    /** swap elements */
                     temp = arr[j - 1];
                     arr[j - 1] = arr[j];
                     arr[j] = temp;
@@ -66,17 +66,17 @@ public class Sorting {
         if (low < high) {
             int pi = partition(arr, low, high);
 
-            // Recursively sort elements before partition and after partition
+            /** Recursively sort elements before partition and after partition */
             quickSort(arr, low, pi - 1);
             quickSort(arr, pi + 1, high);
         }
     }
 
-    public static void quickSort(Shape[] arr, int low, int high) {
+public static void quickSort(Shape[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
 
-            // Recursively sort elements before partition and after partition
+            /** Recursively sort elements before partition and after partition */
             quickSort(arr, low, pi - 1);
             quickSort(arr, pi + 1, high);
         }
@@ -87,11 +87,11 @@ public class Sorting {
         int i = low - 1; // index of smaller element
 
         for (int j = low; j < high; j++) {
-            // If current element is smaller than or equal to pivot
+            /** If current element is smaller than or equal to pivot */
             if (arr[j] <= pivot) {
                 i++;
 
-                // swap arr[i] and arr[j]
+                /** swap arr[i] and arr[j] */
                 double temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
@@ -99,18 +99,18 @@ public class Sorting {
             }
         }
 
-        // swap arr[i+1] and arr[high] (or pivot)
+        /** swap arr[i+1] and arr[high] (or pivot) */
         double temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
-        // return the index of the pivot
+        /** return the index of the pivot */
         return i + 1;
     }
 
     public static int partition(Shape[] arr, int low, int high) {
         Shape pivot = arr[high];
-        int i = low - 1; // index of smaller element
+        int i = low - 1; /** index of smaller element */
 
         for (int j = low; j < high; j++) {
             boolean swap = false;
@@ -129,19 +129,19 @@ public class Sorting {
             }
             if (swap == true) {
                 i++;
-                // swap arr[i] and arr[j]
+                /** swap arr[i] and arr[j] */
                 Shape temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
         }
 
-        // swap arr[i+1] and arr[high] (or pivot)
+        /** swap arr[i+1] and arr[high] (or pivot) */
         Shape temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
-        // return the index of the pivot
+        /** return the index of the pivot */
         return i + 1;
     }
 
@@ -289,6 +289,7 @@ public class Sorting {
             k++;
         }
     }
+
     public static void insertionSort(double[] arr) {
         int n = arr.length;
         for (int i = 1; i < n; ++i) {
@@ -330,92 +331,83 @@ public class Sorting {
         }
     }
 
-    private static void countSort (double arr[], int exp)
-    {
+    private static void countSort(double arr[], int exp) {
         int n = arr.length;
-        double output[] = new double [n]; // output array
-        int count[] = new  int [10]; // count array, "length" of 10, i.e. 10 possible digits (0-9) to keep track of number of occurences of each digit
+        double output[] = new double[n]; /** output array */
+        int count[] = new int[10]; /** count array, "length" of 10, i.e. 10 possible digits (0-9) to keep track of */
+                                   /** number of occurences of each digit */
         Arrays.fill(count, 0);
 
-        //store the count of occurences in count[]
+        /** store the count of occurences in count[] */
         for (int i = 0; i < n; i++)
-            count [(int)Math.floor(arr[i]/exp)%100]++;//math.floor rounds down the digit, may need to change!!!!!!!!!!!**********
-        
-        // Changes count[i] so that count[i] now contains the actual position of said digit in output[]
+            count[(int) Math.floor(arr[i] / exp) % 100]++;
+
+        /** Changes count[i] so that count[i] now contains the actual position of said
+        * digit in output[]
+        */
         for (int i = 1; i < 10; i++)
             count[i] += count[i - 1];
 
-        // this builds the output array
-        for (int i = n - 1; i >= 0; i--)
-        {
-            output[count[(int)Math.floor(arr[i]/exp)%100] - 1] = arr[i];
-            count[(int)Math.floor(arr[i]/exp)%100]--;
+        /** this builds the output array */
+        for (int i = n - 1; i >= 0; i--) {
+            output[count[(int) Math.floor(arr[i] / exp) % 100] - 1] = arr[i];
+            count[(int) Math.floor(arr[i] / exp) % 100]--;
         }
 
-        // Copy the output array to arr[], so that arr[] now contains sorted numbers according to current digit
+        /** Copy the output array to arr[], so that arr[] now contains sorted numbers
+        * according to current digit
+        */
         for (int i = 0; i < n; i++)
             arr[i] = output[i];
     }
 
-    private static void countSort (Shape arr[], int exp)
-    {
+    private static void countSort(Shape arr[], int exp) {
         int n = arr.length;
-        Shape output[] = new Shape [n]; 
-        int count[] = new  int [10]; 
+        Shape output[] = new Shape[n];
+        int count[] = new int[10];
         Arrays.fill(count, 0);
 
-        
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             if (Shape.compareType == "height")
-                count [(int)Math.floor(arr[i].getHeight()/exp)%10]++;
+                count[(int) Math.floor(arr[i].getHeight() / exp) % 10]++;
             else if (Shape.compareType == "volume")
-                count [(int)Math.floor(arr[i].calcVolume()/exp)%10]++;
+                count[(int) Math.floor(arr[i].calcVolume() / exp) % 10]++;
             else if (Shape.compareType == "base area")
-                count [(int)Math.floor(arr[i].calcBaseArea()/exp)%10]++;
+                count[(int) Math.floor(arr[i].calcBaseArea() / exp) % 10]++;
         }
-        
-        
+
         for (int i = 1; i < 10; i++)
             count[i] += count[i - 1];
 
-        
-        for (int i = n - 1; i >= 0; i--)
-        {
-            if (Shape.compareType == "height")
-            {
-                output[count[(int)Math.floor(arr[i].getHeight()/exp)%10] - 1] = arr[i];
-                count[(int)Math.floor(arr[i].getHeight()/exp)%10]--;
-            }
-            else if (Shape.compareType == "volume")
-            {
-                output[count[(int)Math.floor(arr[i].calcVolume()/exp)%10] - 1] = arr[i];
-                count[(int)Math.floor(arr[i].calcVolume()/exp)%10]--;
-            }
-            else if (Shape.compareType == "base area")
-            {
-                output[count[(int)Math.floor(arr[i].calcBaseArea()/exp)%10] - 1] = arr[i];
-                count[(int)Math.floor(arr[i].calcBaseArea()/exp)%10]--;
+        for (int i = n - 1; i >= 0; i--) {
+            if (Shape.compareType == "height") {
+                output[count[(int) Math.floor(arr[i].getHeight() / exp) % 10] - 1] = arr[i];
+                count[(int) Math.floor(arr[i].getHeight() / exp) % 10]--;
+            } else if (Shape.compareType == "volume") {
+                output[count[(int) Math.floor(arr[i].calcVolume() / exp) % 10] - 1] = arr[i];
+                count[(int) Math.floor(arr[i].calcVolume() / exp) % 10]--;
+            } else if (Shape.compareType == "base area") {
+                output[count[(int) Math.floor(arr[i].calcBaseArea() / exp) % 10] - 1] = arr[i];
+                count[(int) Math.floor(arr[i].calcBaseArea() / exp) % 10]--;
             }
         }
 
-        
         for (int i = 0; i < n; i++)
             arr[i] = output[i];
     }
 
-    public static void radixSort(double arr[])
-    {
-        // Find the maximum number in arrary to know number of digits
+    public static void radixSort(double arr[]) {
+        /** Find the maximum number in arrary to know number of digits */
         double max = Arrays.stream(arr).max().getAsDouble();
 
-        // Do counting sort for every digit. Note that instead of passing digit number, exp is passed. (exp is 10^i where i is current digit number)
-        for (int exp = 1; (int)Math.floor(max/exp) > 0; exp *= 10)
+        /** Do counting sort for every digit. Note that instead of passing digit number,
+        * exp is passed. (exp is 10^i where i is current digit number)
+        */
+        for (int exp = 1; (int) Math.floor(max / exp) > 0; exp *= 10)
             countSort(arr, exp);
     }
-    
-    public static void radixSort (Shape arr[])
-    {
+
+    public static void radixSort(Shape arr[]) {
         double max = 0;
         if (Shape.compareType == "height")
             max = Arrays.stream(arr).mapToDouble(Shape::getHeight).max().getAsDouble();
@@ -424,7 +416,7 @@ public class Sorting {
         else if (Shape.compareType == "base area")
             max = Arrays.stream(arr).mapToDouble(Shape::calcBaseArea).max().getAsDouble();
 
-        for (int exp = 1; (int)Math.floor(max/exp) > 0; exp *= 10)
+        for (int exp = 1; (int) Math.floor(max / exp) > 0; exp *= 10)
             countSort(arr, exp);
     }
 }

@@ -1,20 +1,27 @@
+/**
+ * CPRG 304 -B, OOP3
+ * Professor : Helder Oliveira
+ * Group Assignment 1 : Complexity and Sorting
+ * @Authors : Cyril Dizon, Gabriel Leclerc, and Benjamin Roskey (Group 4)
+ * Oct 25, 2023
+ */
+
 package main;
 
 import java.io.BufferedReader;
-
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import shapes.Shape;
-import shapes.SquarePrism;
-import shapes.TriangularPrism;
 import shapes.Cone;
 import shapes.Cylinder;
 import shapes.OctagonalPrism;
 import shapes.PentagonalPrism;
 import shapes.Pyramid;
+import shapes.Shape;
+import shapes.SquarePrism;
+import shapes.TriangularPrism;
 import utility.Sorting;
 
 public class Driver {
@@ -26,13 +33,27 @@ public class Driver {
 
         try {
             Shape[] shapes = readShapesFromFile(filePath);
-            System.out.println(compareType);
-            System.out.println(sortType);
+            System.out.println("Sorting...");
             setShapeCompareType(compareType);
-            String sortTypeName = setSortMethod(sortType); 
+            String sortTypeName = setSortMethod(sortType);
             Method sortMethod = Sorting.class.getMethod(sortTypeName, Shape[].class);
             Shape[] vars = Arrays.copyOfRange(shapes, 1, shapes.length - 1);
-            sortMethod.invoke(sortMethod, new Object[]{vars});
+            long start = System.currentTimeMillis();
+            sortMethod.invoke(sortMethod, new Object[] { vars });
+            long stop = System.currentTimeMillis();
+            long time = stop - start;
+
+            /** Display the first sorted value */
+            System.out.println("First value: " + shapes[0].toString());
+            /** Display every thousandth value */
+            for (int i = 1000; i < shapes.length; i += 1000) {
+                System.out.println("Value at position " + i + ": " + shapes[i - 1]);
+            }
+            /** Display the last sorted value */
+            System.out.println("Last value: " + shapes[shapes.length - 1]);
+
+            System.out.println("Time to sort: " + time + " milliseconds");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,29 +61,30 @@ public class Driver {
 
     public static Shape[] readShapesFromFile(String filePath) throws Exception {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        	String bigString = br.readLine().trim();
-        	String[] splitedStrings = bigString.split(" ");
-        	
+            String bigString = br.readLine().trim();
+            String[] splitedStrings = bigString.split(" ");
+
             int numShapes = Integer.parseInt(splitedStrings[0]);
             Shape[] shapes = new Shape[numShapes];
-            
+
             int splitedStringsIndex = 1;
             for (int i = 0; i < numShapes; i++) {
-            	String path = "shapes.";
-            	String classPath = path.concat(splitedStrings[splitedStringsIndex]);
-            	Class<?> shapeClass = Class.forName(classPath); 
-            	splitedStringsIndex++;
-            	double param1 = Double.parseDouble(splitedStrings[splitedStringsIndex]);
-            	splitedStringsIndex++;
+                String path = "shapes.";
+                String classPath = path.concat(splitedStrings[splitedStringsIndex]);
+                Class<?> shapeClass = Class.forName(classPath);
+                splitedStringsIndex++;
+                double param1 = Double.parseDouble(splitedStrings[splitedStringsIndex]);
+                splitedStringsIndex++;
                 double param2 = Double.parseDouble(splitedStrings[splitedStringsIndex]);
-                
+
                 Constructor<?> constructor = shapeClass.getDeclaredConstructor();
                 constructor.setAccessible(true);
                 Object shape = constructor.newInstance();
 
                 Method initializeMethod1 = null;
                 Method initializeMethod2 = null;
-                if (shape instanceof OctagonalPrism || shape instanceof PentagonalPrism || shape instanceof SquarePrism || shape instanceof TriangularPrism || shape instanceof Pyramid) {
+                if (shape instanceof OctagonalPrism || shape instanceof PentagonalPrism || shape instanceof SquarePrism
+                        || shape instanceof TriangularPrism || shape instanceof Pyramid) {
                     initializeMethod1 = shapeClass.getMethod("setHeight", double.class);
                     initializeMethod2 = shapeClass.getMethod("setSide", double.class);
                 } else if (shape instanceof Cylinder || shape instanceof Cone) {
@@ -73,10 +95,10 @@ public class Driver {
                 initializeMethod1.invoke(shape, param1);
                 initializeMethod2.invoke(shape, param2);
                 splitedStringsIndex++;
-                
+
                 shapes[i] = (Shape) shape;
             }
-            
+
             return shapes;
         }
     }

@@ -1,6 +1,6 @@
 package shapes;
 
-/*
+/**
  * Making this class abstract means that it cannot be instantiated. This is
  * allows us to make our code reusable, maintainable, and scalable!
  * 
@@ -15,12 +15,13 @@ package shapes;
  * compareTo() and compare() methods.
  * 
  * We will use the compareTo() method to compare two prisms by their height.
- * We will use the compare() method to compare two prisms by their base area and volume.
+ * We will use the compare() method to compare two prisms by their base area and
+ * volume.
  */
 public abstract class Prism extends Shape {
     private double side;
 
-    /*
+    /**
      * This constructor will be called by the constructors of the classes that
      * extend this class. It will set the height and sideLength attributes to the
      * values passed in as arguments.The constructor also calls the constructor of
@@ -31,7 +32,7 @@ public abstract class Prism extends Shape {
         this.side = side;
     }
 
-    /*
+    /**
      * This constructor will be called by the constructors of the classes that
      * extend this class. The constructor also calls the constructor of
      * the Shape class, which adds the shape to the shapesArray array.
@@ -40,17 +41,35 @@ public abstract class Prism extends Shape {
         super();
     }
 
-    /*
+    /**
      * The getSide() method will return the side attribute.
      */
     public double getSide() {
         return side;
     }
 
-    /*
+    /**
      * The setSide() method will set the side attribute.
      */
     public void setSide(double side) {
         this.side = side;
+    }
+
+    public String toString() {
+        String className;
+
+        if (this instanceof OctagonalPrism) {
+            className = "Octagonal Prism";
+        } else if (this instanceof PentagonalPrism) {
+            className = "Pentagonal Prism";
+        } else if (this instanceof SquarePrism) {
+            className = "Square Prism";
+        } else if (this instanceof TriangularPrism) {
+            className = "Triangular Prism";
+        } else {
+            className = "Prism";
+        }
+
+        return "Shape: " + className + ", Height: " + getHeight() + ", Side: " + getSide();
     }
 }

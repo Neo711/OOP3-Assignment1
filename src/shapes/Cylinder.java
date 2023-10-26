@@ -32,4 +32,8 @@ public class Cylinder extends Shape {
         double baseArea = Math.PI * Math.pow(this.radius, 2);
         return baseArea;
     }
+
+    public String toString() {
+        return "Shape: Cylinder, Height: " + getHeight() + ", Radius: " + getRadius();
+    }
 }

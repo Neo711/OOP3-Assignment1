@@ -1,15 +1,15 @@
 package testing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-import utility.Sorting;
 import shapes.Cone;
 import shapes.Cylinder;
 import shapes.OctagonalPrism;
 import shapes.Shape;
 import shapes.TriangularPrism;
+import utility.Sorting;
 
 public class SortingTest {
 
@@ -73,11 +73,11 @@ public class SortingTest {
 	public void testBubbleSortShapesBaseArea() {
 		Shape[] arr = new Shape[5];
 		Shape[] expected = new Shape[5];
-		Shape s1 = new TriangularPrism(3.0, 3.0); // 3.8971143170
-		Shape s2 = new Cone(1.0, 1.0); // 3.1415926535898
-		Shape s3 = new Cylinder(4.0, 4.0); // 50.26548245743669
-		Shape s4 = new TriangularPrism(2.0, 2.0); // 1.7320508075689
-		Shape s5 = new OctagonalPrism(5.0, 5.0); // 120.710678
+		Shape s1 = new TriangularPrism(3.0, 3.0);
+		Shape s2 = new Cone(1.0, 1.0);
+		Shape s3 = new Cylinder(4.0, 4.0);
+		Shape s4 = new TriangularPrism(2.0, 2.0);
+		Shape s5 = new OctagonalPrism(5.0, 5.0);
 		arr[0] = s1;
 		arr[1] = s2;
 		arr[2] = s3;
@@ -153,11 +153,11 @@ public class SortingTest {
 	public void testQuickSortShapesBaseArea() {
 		Shape[] arr = new Shape[5];
 		Shape[] expected = new Shape[5];
-		Shape s1 = new TriangularPrism(3.0, 3.0); // 3.8971143170
-		Shape s2 = new Cone(1.0, 1.0); // 3.1415926535898
-		Shape s3 = new Cylinder(4.0, 4.0); // 50.26548245743669
-		Shape s4 = new TriangularPrism(2.0, 2.0); // 1.7320508075689
-		Shape s5 = new OctagonalPrism(5.0, 5.0); // 120.710678
+		Shape s1 = new TriangularPrism(3.0, 3.0);
+		Shape s2 = new Cone(1.0, 1.0);
+		Shape s3 = new Cylinder(4.0, 4.0);
+		Shape s4 = new TriangularPrism(2.0, 2.0);
+		Shape s5 = new OctagonalPrism(5.0, 5.0);
 		arr[0] = s1;
 		arr[1] = s2;
 		arr[2] = s3;
@@ -233,11 +233,11 @@ public class SortingTest {
 	public void testSelectionSortShapesBaseArea() {
 		Shape[] arr = new Shape[5];
 		Shape[] expected = new Shape[5];
-		Shape s1 = new TriangularPrism(3.0, 3.0); // 3.8971143170
-		Shape s2 = new Cone(1.0, 1.0); // 3.1415926535898
-		Shape s3 = new Cylinder(4.0, 4.0); // 50.26548245743669
-		Shape s4 = new TriangularPrism(2.0, 2.0); // 1.7320508075689
-		Shape s5 = new OctagonalPrism(5.0, 5.0); // 120.710678
+		Shape s1 = new TriangularPrism(3.0, 3.0);
+		Shape s2 = new Cone(1.0, 1.0);
+		Shape s3 = new Cylinder(4.0, 4.0);
+		Shape s4 = new TriangularPrism(2.0, 2.0);
+		Shape s5 = new OctagonalPrism(5.0, 5.0);
 		arr[0] = s1;
 		arr[1] = s2;
 		arr[2] = s3;
@@ -313,11 +313,11 @@ public class SortingTest {
 	public void testMergeSortShapesBaseArea() {
 		Shape[] arr = new Shape[5];
 		Shape[] expected = new Shape[5];
-		Shape s1 = new TriangularPrism(3.0, 3.0); // 3.8971143170
-		Shape s2 = new Cone(1.0, 1.0); // 3.1415926535898
-		Shape s3 = new Cylinder(4.0, 4.0); // 50.26548245743669
-		Shape s4 = new TriangularPrism(2.0, 2.0); // 1.7320508075689
-		Shape s5 = new OctagonalPrism(5.0, 5.0); // 120.710678
+		Shape s1 = new TriangularPrism(3.0, 3.0);
+		Shape s2 = new Cone(1.0, 1.0);
+		Shape s3 = new Cylinder(4.0, 4.0);
+		Shape s4 = new TriangularPrism(2.0, 2.0);
+		Shape s5 = new OctagonalPrism(5.0, 5.0);
 		arr[0] = s1;
 		arr[1] = s2;
 		arr[2] = s3;
