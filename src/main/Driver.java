@@ -13,12 +13,12 @@ public class Driver {
         String compareType = args[1];
         String sortType = args[2];
 
-        setShapeCompareType(compareType);
-        String sortTypeName = setSortMethod(sortType);
-
         try {
             Shape[] shapes = readShapesFromFile(filePath);
+            setShapeCompareType(compareType);
+            String sortTypeName = setSortMethod(sortType);
             Method sortMethod = Shape.class.getMethod(sortTypeName, Shape[].class);
+            sortMethod.invoke(sortMethod, (Object) shapes);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class Driver {
         ;
     }
 
-    public static String setSortMethod(String sortType) throws NoSuchMethodException, SecurityException {
+    public static String setSortMethod(String sortType) {
         String sortMethod = "";
         if (sortType == "b") {
             return "bubbleSort";
@@ -82,6 +82,7 @@ public class Driver {
         } else {
             System.out.println("Invalid sort type. Please enter 'b', 's', 'i', or 'm'.");
         }
+        return sortMethod;
     }
 }
 
