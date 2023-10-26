@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 import shapes.Cone;
 import shapes.Cylinder;
@@ -37,9 +36,8 @@ public class Driver {
             setShapeCompareType(compareType);
             String sortTypeName = setSortMethod(sortType);
             Method sortMethod = Sorting.class.getMethod(sortTypeName, Shape[].class);
-            Shape[] vars = Arrays.copyOfRange(shapes, 1, shapes.length - 1);
             long start = System.currentTimeMillis();
-            sortMethod.invoke(sortMethod, new Object[] { vars });
+            sortMethod.invoke(sortMethod, (Object) shapes);
             long stop = System.currentTimeMillis();
             long time = stop - start;
 
