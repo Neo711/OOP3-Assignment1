@@ -84,6 +84,7 @@ public class Driver {
         }
         return sortMethod;
     }
+}
 
 // //if (shapeClass.equals(Circle.class)) {
 // double radius = Double.parseDouble(br.readLine().trim());
