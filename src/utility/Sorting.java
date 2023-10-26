@@ -1,5 +1,7 @@
 package utility;
 
+import java.util.Arrays;
+
 import shapes.Shape;
 
 public class Sorting {
