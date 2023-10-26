@@ -1,10 +1,21 @@
 package main;
 
 import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+
 import shapes.Shape;
+import shapes.SquarePrism;
+import shapes.TriangularPrism;
+import shapes.Cone;
+import shapes.Cylinder;
+import shapes.OctagonalPrism;
+import shapes.PentagonalPrism;
+import shapes.Pyramid;
+import utility.Sorting;
 
 public class Driver {
 
@@ -15,10 +26,13 @@ public class Driver {
 
         try {
             Shape[] shapes = readShapesFromFile(filePath);
+            System.out.println(compareType);
+            System.out.println(sortType);
             setShapeCompareType(compareType);
-            String sortTypeName = setSortMethod(sortType);
-            Method sortMethod = Shape.class.getMethod(sortTypeName, Shape[].class);
-            sortMethod.invoke(sortMethod, (Object) shapes);
+            String sortTypeName = setSortMethod(sortType); 
+            Method sortMethod = Sorting.class.getMethod(sortTypeName, Shape[].class);
+            Shape[] vars = Arrays.copyOfRange(shapes, 1, shapes.length - 1);
+            sortMethod.invoke(sortMethod, new Object[]{vars});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,38 +40,53 @@ public class Driver {
 
     public static Shape[] readShapesFromFile(String filePath) throws Exception {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            int numShapes = Integer.parseInt(br.readLine().trim());
+        	String bigString = br.readLine().trim();
+        	String[] splitedStrings = bigString.split(" ");
+        	
+            int numShapes = Integer.parseInt(splitedStrings[0]);
             Shape[] shapes = new Shape[numShapes];
+            
+            int splitedStringsIndex = 1;
             for (int i = 0; i < numShapes; i++) {
-                String shapeType = br.readLine().trim();
-                Class<?> shapeClass = Class.forName(shapeType);
-
-                double param1 = Double.parseDouble(br.readLine().trim());
-                double param2 = Double.parseDouble(br.readLine().trim());
-
+            	String path = "shapes.";
+            	String classPath = path.concat(splitedStrings[splitedStringsIndex]);
+            	Class<?> shapeClass = Class.forName(classPath); 
+            	splitedStringsIndex++;
+            	double param1 = Double.parseDouble(splitedStrings[splitedStringsIndex]);
+            	splitedStringsIndex++;
+                double param2 = Double.parseDouble(splitedStrings[splitedStringsIndex]);
+                
                 Constructor<?> constructor = shapeClass.getDeclaredConstructor();
                 constructor.setAccessible(true);
                 Object shape = constructor.newInstance();
 
-                Method initializeMethod = shapeClass.getMethod("initialize", double.class, double.class);
-                initializeMethod.invoke(shape, param1, param2);
-
-                if (shape instanceof Shape) {
-                    shapes[i] = (Shape) shape;
-                } else {
-                    System.out.println("The class " + shapeType + " is not an instance of Shape. Skipping...");
+                Method initializeMethod1 = null;
+                Method initializeMethod2 = null;
+                if (shape instanceof OctagonalPrism || shape instanceof PentagonalPrism || shape instanceof SquarePrism || shape instanceof TriangularPrism || shape instanceof Pyramid) {
+                    initializeMethod1 = shapeClass.getMethod("setHeight", double.class);
+                    initializeMethod2 = shapeClass.getMethod("setSide", double.class);
+                } else if (shape instanceof Cylinder || shape instanceof Cone) {
+                    initializeMethod1 = shapeClass.getMethod("setHeight", double.class);
+                    initializeMethod2 = shapeClass.getMethod("setRadius", double.class);
                 }
+
+                initializeMethod1.invoke(shape, param1);
+                initializeMethod2.invoke(shape, param2);
+                splitedStringsIndex++;
+                
+                shapes[i] = (Shape) shape;
             }
+            
             return shapes;
         }
     }
 
     public static void setShapeCompareType(String compareType) {
-        if (compareType == "h") {
+        if (compareType.equals("h")) {
             Shape.compareType = "height";
-        } else if (compareType == "v") {
+        } else if (compareType.equals("v")) {
             Shape.compareType = "volume";
-        } else if (compareType == "a") {
+        } else if (compareType.equals("a")) {
             Shape.compareType = "base area";
         } else {
             System.out.println("Invalid compare type. Please enter 'h' or 'v'.");
@@ -66,23 +95,23 @@ public class Driver {
     }
 
     public static String setSortMethod(String sortType) {
-        String sortMethod = "";
-        if (sortType == "b") {
+        String sortMethodString = "";
+        if (sortType.equals("b")) {
             return "bubbleSort";
-        } else if (sortType == "s") {
+        } else if (sortType.equals("s")) {
             return "selectionSort";
-        } else if (sortType == "i") {
+        } else if (sortType.equals("i")) {
             return "insertionSort";
-        } else if (sortType == "m") {
+        } else if (sortType.equals("m")) {
             return "mergeSort";
-        } else if (sortType == "q") {
+        } else if (sortType.equals("q")) {
             return "quickSort";
-        } else if (sortType == "z") {
+        } else if (sortType.equals("z")) {
             return "radixSort";
         } else {
             System.out.println("Invalid sort type. Please enter 'b', 's', 'i', or 'm'.");
         }
-        return sortMethod;
+        return sortMethodString;
     }
 }
 
