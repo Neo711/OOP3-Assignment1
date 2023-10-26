@@ -287,4 +287,53 @@ public class Sorting {
             k++;
         }
     }
+    public static void insertionSort(double[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            double key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j--];
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    private static void countSort (double arr[], int exp)
+    {
+        int n = arr.length;
+        double output[] = new double [n]; // output array
+        int count[] = new  int [10]; // count array, "length" of 10, i.e. 10 possible digits (0-9) to keep track of number of occurences of each digit
+        Arrays.fill(count, 0);
+
+        //store the count of occurences in count[]
+        for (int i = 0; i < n; i++)
+            count [(int)Math.floor(arr[i]/exp)%10]++;//math.floor rounds down the digit, may need to change!!!!!!!!!!!**********
+        
+        // Changes count[i] so that count[i] now contains the actual position of said digit in output[]
+        for (int i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+
+        // this builds the output array
+        for (int i = n - 1; i >= 0; i--)
+        {
+            output[count[(int)Math.floor(arr[i]/exp)%10] - 1] = arr[i];
+            count[(int)Math.floor(arr[i]/exp)%10]--;
+        }
+
+        // Copy the output array to arr[], so that arr[] now contains sorted numbers according to current digit
+        for (int i = 0; i < n; i++)
+            arr[i] = output[i];
+    }
+
+    public static void radixSort(double arr[])
+    {
+        // Find the maximum number in arrary to know number of digits
+        double max = Arrays.stream(arr).max().getAsDouble();
+
+        // Do counting sort for every digit. Note that instead of passing digit number, exp is passed. (exp is 10^i where i is current digit number)
+        for (int exp = 1; (int)Math.floor(max/exp) > 0; exp *= 10)
+            countSort(arr, exp);
+    }
 }
