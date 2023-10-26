@@ -9,9 +9,9 @@ import shapes.Shape;
 public class Driver {
 
     public static void main(String[] args) {
-        String filePath = args[0];
-        String compareType = args[1];
-        String sortType = args[2];
+        String filePath = args[0].substring(2);
+        String compareType = args[1].substring(2);
+        String sortType = args[2].substring(2);
 
         try {
             Shape[] shapes = readShapesFromFile(filePath);
@@ -84,7 +84,6 @@ public class Driver {
         }
         return sortMethod;
     }
-}
 
 // //if (shapeClass.equals(Circle.class)) {
 // double radius = Double.parseDouble(br.readLine().trim());
