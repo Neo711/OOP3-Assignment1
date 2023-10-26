@@ -1,7 +1,7 @@
 package shapes;
 
 public class Cone extends Shape {
-    public double radius;
+    private double radius;
 
     public Cone(double height, double radius) {
         super(height);
@@ -23,7 +23,7 @@ public class Cone extends Shape {
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = baseArea * this.height / 3;
+        double volume = baseArea * this.getHeight() / 3;
         return volume;
     }
 

@@ -22,7 +22,7 @@ import java.util.Comparator;
 public abstract class Shape implements Comparable<Shape>, Comparator<Shape> {
     public static Shape[] shapesArray = {};
     public static String compareType;
-    public double height;
+    private double height;
 
     /*
      * This constructor will be called by the constructors of the classes that

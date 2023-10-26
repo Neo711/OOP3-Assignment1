@@ -18,7 +18,7 @@ package shapes;
  * We will use the compare() method to compare two prisms by their base area and volume.
  */
 public abstract class Prism extends Shape {
-    double side;
+    private double side;
 
     /*
      * This constructor will be called by the constructors of the classes that

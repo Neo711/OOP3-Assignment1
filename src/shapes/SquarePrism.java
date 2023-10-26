@@ -13,13 +13,13 @@ public class SquarePrism extends Prism {
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = baseArea * this.height;
+        double volume = baseArea * this.getHeight();
         return volume;
     }
 
     @Override
     public double calcBaseArea() {
-        double baseArea = this.side * this.side;
+        double baseArea = this.getSide() * this.getSide();
         return baseArea;
     }
 }

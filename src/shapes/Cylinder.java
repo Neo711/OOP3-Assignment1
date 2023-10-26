@@ -1,7 +1,7 @@
 package shapes;
 
 public class Cylinder extends Shape {
-    public double radius;
+    private double radius;
 
     public Cylinder(double height, double radius) {
         super(height);
@@ -23,7 +23,7 @@ public class Cylinder extends Shape {
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = baseArea * this.height;
+        double volume = baseArea * this.getHeight();
         return volume;
     }
 

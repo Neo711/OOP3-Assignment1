@@ -13,13 +13,13 @@ public class PentagonalPrism extends Prism {
     @Override
     public double calcVolume() {
         double baseArea = this.calcBaseArea();
-        double volume = baseArea * this.height;
+        double volume = baseArea * this.getHeight();
         return volume;
     }
 
     @Override
     public double calcBaseArea() {
-        double baseArea = Math.sqrt(5 * (5 + 2 * Math.sqrt(5))) * Math.pow(this.side, 2) / 4;
+        double baseArea = Math.sqrt(5 * (5 + 2 * Math.sqrt(5))) * Math.pow(this.getSide(), 2) / 4;
         return baseArea;
     }
 }
