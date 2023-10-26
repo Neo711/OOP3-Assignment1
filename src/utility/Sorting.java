@@ -1,5 +1,7 @@
 package utility;
 
+import shapes.Shape;
+
 public class Sorting {
 
     public static void bubbleSort(double[] arr) {
@@ -18,7 +20,40 @@ public class Sorting {
             }
         }
     }
-    
+
+    public static void bubbleSort(Shape[] arr) {
+        int n = arr.length;
+        Shape temp;
+        int i = 0;
+        int j = 0;
+        for (i = 0; i < n; i++) {
+            for (j = 1; j < (n - i); j++) {
+                if (Shape.compareType == "height") {
+                    if (arr[j - 1].getHeight() > arr[j].getHeight()) {
+                        // swap elements
+                        temp = arr[j - 1];
+                        arr[j - 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                } else if (Shape.compareType == "volume") {
+                    if (arr[j - 1].calcVolume() > arr[j].calcVolume()) {
+                        // swap elements
+                        temp = arr[j - 1];
+                        arr[j - 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                } else if (Shape.compareType == "base area") {
+                    if (arr[j - 1].calcBaseArea() > arr[j].calcBaseArea()) {
+                        // swap elements
+                        temp = arr[j - 1];
+                        arr[j - 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+        }
+    }
+
     public static void quickSort(double[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
